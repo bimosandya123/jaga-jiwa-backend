@@ -1,0 +1,134 @@
+/* style.css */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+header{
+    padding: 10px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transition: 0.6s;
+    z-index: 1000;
+    /* padding: 100px 100px; */
+}
+header.sticky{
+    padding: 0px 0px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 5px 20px grey;
+    transition: 0.6s;
+}
+header ul{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header ul li{
+    position: relative;
+    list-style-type: none;
+}
+header ul li a{
+    position: relative;
+    margin: 0 15px;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: 0.6s;
+}
+/* Gaya khusus untuk tombol "Sign Up" */
+.btn-sign-up {
+    width: 135px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #1B7C9D;
+    color: #ffffff;
+    border: none;
+}
+.home{
+    height: fit-content;
+    padding: 0px 0px 0px 150px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;   
+}
+
+.about{
+    /* background-color: red; */
+    font-family: 'Manrope', sans-serif;
+    height: fit-content;
+    padding: 120px 100px 50px;
+    margin: 0px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.about .text p{
+    max-width: 600px;
+    /* font-size: 20px; */
+}
+.services{
+    /* background-color: red; */
+    font-family: 'Manrope', sans-serif;
+    height: fit-content;
+    padding: 80px 100px 80px;
+    margin: 0px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.services h3{
+    max-width: 700px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.services p{
+    max-width: 700px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.services .widget{
+    /* background-color: red; */
+    width: 80%;
+    /* padding: 0px; */
+    margin: 50px 0px 80px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.services .widget .card{
+    border-radius: 40px;
+    z-index: 1;
+    background-color: #BDE2EA;
+    padding: 150px 20px 20px;
+    margin: 0px 20px 0px;
+    max-width: 360;
+    position: relative;
+    display: flex;
+    text-align: left;
+    justify-content: space-around;
+    align-items: center;
+}
+.services .widget .card img{
+    position: absolute;
+    z-index: -1;
+    /* background-color: antiquewhite; */
+    width: 100%;
+}
