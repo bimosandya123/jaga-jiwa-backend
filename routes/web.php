@@ -23,5 +23,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/google-logged-in', function () {
         return view('google-logged-in');
     });
+    Route::get('/facebook-logged-in', function () {
+        return view('facebook-logged-in');
+    });
     Route::delete('/logout', [authController::class, 'logout'])->name('logout');
 });

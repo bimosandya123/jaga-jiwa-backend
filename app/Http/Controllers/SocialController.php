@@ -17,9 +17,11 @@ class SocialController extends Controller
         if ($finduser) {
             // dd($user);
             Auth::login($finduser);
-            return view('google-logged-in', [
-                'user' => $user,
-            ]);
+            if(Auth::user()->role == 'USER'){
+                return redirect('google-logged-in')->with('success', 'Login berhasil');
+            }else {
+                return redirect('facebook-logged-in')->with('success', 'Login berhasil');
+            }
         } else {
             // dd($user);
             $newUser = \App\Models\User::create([
@@ -30,7 +32,11 @@ class SocialController extends Controller
                 'password' => bcrypt($user->token)  
             ]);
             Auth::login($newUser);
-            return redirect()->intended('/google-logged-in');
+            if(Auth::user()->role == 'USER'){
+                return redirect('google-logged-in')->with('success', 'Login berhasil');
+            }else {
+                return redirect('facebook-logged-in')->with('success', 'Login berhasil');
+            }
         }
     }
     public function facebookRedirect(){
@@ -43,9 +49,11 @@ class SocialController extends Controller
         if ($finduser) {
             // dd($user);
             Auth::login($finduser);
-            return view('/google-logged-in', [
-                'user' => $user,
-            ]);
+            if(Auth::user()->role == 'USER'){
+                return redirect('google-logged-in')->with('success', 'Login berhasil');
+            }else {
+                return redirect('facebook-logged-in')->with('success', 'Login berhasil');
+            }
         } else {
             // dd($user);
             $newUser = \App\Models\User::create([
@@ -56,6 +64,11 @@ class SocialController extends Controller
                 'password' => bcrypt($user->token)  
             ]);
             Auth::login($newUser);
+            if(Auth::user()->role == 'USER'){
+                return redirect('google-logged-in')->with('success', 'Login berhasil');
+            }else {
+                return redirect('facebook-logged-in')->with('success', 'Login berhasil');
+            }
         }
     }
     

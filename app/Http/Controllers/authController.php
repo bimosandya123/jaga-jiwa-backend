@@ -34,9 +34,12 @@ class authController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
-
         if (Auth::attempt($credetials)) {
-            return redirect('google-logged-in')->with('success', 'Login berhasil');
+            if(Auth::user()->role == 'USER'){
+                return redirect('google-logged-in')->with('success', 'Login berhasil');
+            }else {
+                return redirect('facebook-logged-in')->with('success', 'Login berhasil');
+            }
         }
 
         return back()->with('error', 'Email or Password salah');

@@ -164,16 +164,16 @@
 </head>
 
 <body>
+    @if(Session::has('error'))
+    <div class="alert alert-success" role="alert" style="position: absolute; top:0; width:100%; z-index: 1000;">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{ Session::get('error') }}
+        </div>
+    @endif
     <div class="container">
         <h1>Welcome Back !</h1>
         <p>Enter your Credentials to access your account</p>
         <br>
-        @if(Session::has('error'))
-        <div class="alert alert-success" role="alert" style="position: absolute; top:0; width:100%; z-index: 1000;">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                {{ Session::get('error') }}
-            </div>
-        @endif
         <form action="{{ route('login') }}" method="POST">
             @csrf
             <input type="text" name="email" placeholder="Username"required>
