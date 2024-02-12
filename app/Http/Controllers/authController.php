@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Hash;
 
 class authController extends Controller
 {
+    public function index(){
+        $post = User::all();
+        return response()->json($post);
+    }
     public function register()
     {
         return view('register');

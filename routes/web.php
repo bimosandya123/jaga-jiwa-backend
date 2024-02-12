@@ -6,12 +6,15 @@ use App\Http\Controllers\authController;
 Route::get('/', function () {
     return view('Landing_page');
 });
+//public routes
 Route::get('/auth/redirect', [SocialController::class, 'redirect'])->name('google.redirect');
 Route::get('/google/redirect', [SocialController::class, 'googleCallback'])->name('google.callback');
 
 Route::get('/auth/redirect/facebook', [SocialController::class, 'facebookRedirect'])->name('facebook.redirect');
 Route::get('/facebook/redirect', [SocialController::class, 'facebookCallback'])->name('facebook.callback');
 
+
+// protected routes
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [authController::class, 'register'])->name('register');
     Route::post('/register', [authController::class, 'registerPost'])->name('register');

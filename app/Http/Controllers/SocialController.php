@@ -15,7 +15,7 @@ class SocialController extends Controller
         $finduser = \App\Models\User::where('email', '=', $user->email)->first();
         
         if ($finduser) {
-            // dd($user);
+            dd($user);
             Auth::login($finduser);
             if(Auth::user()->role == 'USER'){
                 return redirect('google-logged-in')->with('success', 'Login berhasil');
