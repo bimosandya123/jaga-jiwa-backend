@@ -158,19 +158,19 @@
 
 <body>
     @if(Session::has('success'))
-        <div class="alert alert-success" role="alert" style="position: absolute; top:0; width:100%; z-index: 1000;">
+        <div class="alert alert-success" id='error-message' role="alert" style="position: absolute; top:0; width:100%; z-index: 1000;">
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             {{ Session::get('success') }}
         </div>
     @endif
     <div class="container">
         <h1>Welcome Back !</h1>
-        <form action="{{ route('register') }}" method="POST">
+        <form id="registerForm">
             @csrf
             <input type="text" name="name" class="form-control" id="name" placeholder="name" required>
             <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
             <input type="password" name="password" class="form-control" id="password" placeholder="password" required>
-            <button type="submit" value="submit">Sign In</button>
+            <button type="submit" onclick="register()">Sign In</button>
         </form>
         <div class="or">
             <div class="divider"></div>
@@ -197,5 +197,46 @@
             </div>
         </div>
     </div>
+    <script>
+        function register() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+    
+            var formData = new FormData();
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('password', password);
+    
+            fetch('/api/register', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return response.text().then(text => {
+                        console.error('Server Error:', text);
+                        throw new Error('Server Error');
+                    });
+                }
+            })
+            // .then(data => {
+            //     // memberikan pesan akun berhasil di tambahkan
+            //     document.getElementById('error-message').innerText = 'Akun berhasil ditambahkan';
+            // })
+            // .catch(error => {
+            //     console.error('register failed:', error.message);
+            //     alert('register failed: ' + error.message);
+    
+            //     // Menampilkan pesan kesalahan akun sudah ada
+            //     document.getElementById('error-message').innerText = error.message;
+            // });
+        }
+    </script>
 </body>
 </html>

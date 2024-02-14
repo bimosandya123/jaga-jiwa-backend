@@ -174,12 +174,13 @@
         <h1>Welcome Back !</h1>
         <p>Enter your Credentials to access your account</p>
         <br>
-        <form action="{{ route('login') }}" method="POST">
+        <form id="loginForm">
             @csrf
-            <input type="text" name="email" placeholder="Username"required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit" name="submit">Sign In</button>
+            <input type="text" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="button" onclick="login()">Login</button>
         </form>
+        
         <div class="or">
             <div class="divider"></div>
             <div class="or-text">Or</div>
@@ -205,5 +206,39 @@
             </div>
         </div>
     </div>
+    <script>
+       function login() {
+        
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        var formData = new FormData();
+        formData.append('email', email);
+        formData.append('password', password);
+        fetch('/api/login', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Invalid credentials');
+            }
+        })
+        .then(data => {
+            // Login berhasil, redirect ke URL yang diberikan oleh server
+            window.location.href = data.redirect_url;
+        })
+        .catch(error => {
+            console.error('Login failed:', error.message);
+            alert('Login failed: ' + error.message);
+        });
+    }
+    </script>
+    
 </body>
 </html>

@@ -29,7 +29,7 @@
             <li><a class="nav-link active" aria-current="page" href="#about">About</a></li>
             <li><a class="nav-link active" aria-current="page" href="#services">Service</a></li>
             <li><a class="nav-link active" aria-current="page" href="#">Page</a></li>
-            <li><a class="nav-link active" aria-current="page" href="/login"><button class="btn-sign-up">Sign Up</button></a></li>
+            <li><a class="nav-link active" aria-current="page" href="login"><button class="btn-sign-up">Sign Up</button></a></li>
         </ul>
     </header>
     <script type="text/javascript">

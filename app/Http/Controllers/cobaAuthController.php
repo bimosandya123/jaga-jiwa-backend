@@ -41,19 +41,30 @@ class cobaAuthController extends Controller
         ]);
 
     }
-
     public function login(Request $request)
     {
+        
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $auth = Auth::user();
-            $success['remember_token'] = $auth->createToken('remember_token')->plainTextToken;
-            $success['name'] = $auth->name;
-            $success['email'] = $auth->email;
+            $user = Auth::user();
+           
+            $success['remember_token'] = $user->createToken('remember_token')->plainTextToken;
+            $success['name'] = $user->name;
+            $success['email'] = $user->email;
 
+            if(Auth::user()->role == 'USER'){
+                return response()->json([
+                    'user' => auth()->user(),
+                    'redirect_url' => '/google-logged-in' 
+                ]);
+            }else {
+                return response()->json([
+                    'user' => auth()->user(),
+                    'redirect_url' => 'facebook-logged-in'
+                ]);
+            }
             return response()->json([
-                'success' => true,
-                'message' => 'Login sukses',
-                'data' => $success
+                'user' => auth()->user(),
+                'redirect_url' => '/google-logged-in' // Misalnya, arahkan ke '/google-logged-in' setelah login berhasil
             ]);
         } else {
             return response()->json([
